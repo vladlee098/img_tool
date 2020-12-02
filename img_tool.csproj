@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <PlatformTarget>x64</PlatformTarget>
+    <RuntimeIdentifier>win10-x64</RuntimeIdentifier>
+    <TargetFramework>net5.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <TargetTrim>True</TargetTrim>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="src\DeleteByAttribute.cs" />
+    <Content Include="src\ArgParser.cs" />
+    <Content Include="src\ConsoleLog.cs" />
+    <Content Include="src\DeleteBySize.cs" />
+    <Content Include="src\ITask.cs" />
+    <Content Include="src\Program.cs" />
+    <Content Include="src\MoveToRecycleBin.cs" />
+    <Content Include="src\Win32ApiWrapper.cs" />
+    <Content Include="src\TaskFactory.cs" />
+    <Content Include="src\Argument.cs" />
+    <Content Include="src\OptionsBase.cs" />
+    <Content Include="src\ArgumentFactory.cs" />
+    <Content Include="src\OptionBase.cs" />
+    <Content Include="src\OptionFactory.cs" />
+    <Content Include="src\IOption.cs" />
+  </ItemGroup>
+</Project>
