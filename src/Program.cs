@@ -37,7 +37,8 @@ namespace img_tool.src
             Console.WriteLine("------------------------------------------------------------------------");
                      
             //string[] testArgs = new string[] { "rd", "-d" , "-i"};
-            string[] testArgs = new string[] { "da", @"-t:e:\@@@test\Liza's birthday" , "-i"};
+            //string[] testArgs = new string[] { "da", @"-i:e:\@@@test\Liza's birthday" , "-w", ""};
+            string[] testArgs = new string[] { "da", @"-i:e:\@@@test\Liza's birthday" , "-w", "-a:H", "-f:*Rot*"};
 
             try
             {
@@ -54,8 +55,9 @@ namespace img_tool.src
                 ConsoleLog.WriteError( ex.Message);
             }
 
+            Console.WriteLine();
             Console.WriteLine("------------------------------------------------------------------------");
-            Console.WriteLine(">> Press ENTER to quit. ");
+            Console.WriteLine(">> Done. Press ENTER to quit. ");
             Console.ReadLine();
         }
     }
