@@ -8,17 +8,13 @@ namespace img_tool.src
     public class ArgParser
     {
 
-        static List<String> Commands = new List<String> { "rd", "sd", "ds", "da"};
+        static List<String> Commands = new List<String> { "rd", "ds", "da"};
 
         static TaskTypes GetTaskType( string arg )
         {
             if ( arg == "rd")
             {
-                return TaskTypes.RenameByDateMask;
-            }
-            else if ( arg == "sd")
-            {
-                return TaskTypes.SetFileDate;
+                return TaskTypes.RenameByDate;
             }
             else if ( arg == "ds")
             {

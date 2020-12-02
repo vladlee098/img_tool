@@ -11,15 +11,16 @@ namespace img_tool.src
 
         static OptionFactory()
         {
-            _options.Add( new TextOption( "FilePattern", OptionTypes.FileMask, "-f", "*.jpg") );
-            _options.Add( new TextOption( "DatePattern", OptionTypes.DatePattern, "-p", string.Empty) );
+            _options.Add( new TextOption( "FileSearch", OptionTypes.FileMask, "-f") );
+            _options.Add( new TextOption( "DatePattern", OptionTypes.DatePattern, "-p") );
             _options.Add( new FlagOption( "SetCreationDate", OptionTypes.SetCreationDate, "-c") );
             _options.Add( new FlagOption( "SetLastWriteDate", OptionTypes.SetLastWriteDate, "-w") );
-            _options.Add( new NumberOption( "MaxSizeKB", OptionTypes.MaxSizeKB, "-z", 1) );
-            _options.Add( new PathOption( "SourceDirectory", OptionTypes.SourceDirectory, "-i", ".") );
-            _options.Add( new PathOption( "TargetDirectory", OptionTypes.TargetDirectory, "-t", ".") );
+            _options.Add( new NumberOption( "MaxSizeKB", OptionTypes.MaxSizeKB, "-z") );
+            _options.Add( new PathOption( "SourceDirectory", OptionTypes.SourceDirectory, "-i") );
+            //_options.Add( new PathOption( "TargetDirectory", OptionTypes.TargetDirectory, "-t") );
+            _options.Add( new FlagOption( "No questions asked, just delete", OptionTypes.IncludeSubDirectories, "-force") );
             _options.Add( new FlagOption( "IncludeSubDirectories", OptionTypes.IncludeSubDirectories, "-r") );
-            _options.Add( new FileAttributeOption( "FileAttribute", OptionTypes.FileAttribute, "-a", FileAttributes.Archive) );
+            _options.Add( new FileAttributeOption( "FileAttribute", OptionTypes.FileAttribute, "-a") );
         }
 
         public static IOption Find( string arg )

@@ -11,34 +11,38 @@ namespace img_tool.src
 {
     public sealed class DeleteByAttribute : ITask
     {
-        string _targetDir;
+        string _sourceDir;
         string _mask;
         bool _recursive;
         FileAttributes _fileAttribute;
 
         public DeleteByAttribute( List<IOption> options )
         {
-            _targetDir = (options.Single( x => x.OptionType == OptionTypes.TargetDirectory) as PathOption).Data;
-            _mask = (options.Single( x => x.OptionType == OptionTypes.FileMask) as TextOption).Data;
-            _recursive = (options.Single( x => x.OptionType == OptionTypes.IncludeSubDirectories) as FlagOption).Data;
-            _fileAttribute = (options.Single( x => x.OptionType == OptionTypes.FileAttribute) as FileAttributeOption).Data;
+            if ( !ValidateInputs(options))
+            {
+                throw new ArgumentException( $"Provided options invalid for DeleteByAttribute, check command line");
+            }
         }
 
-        public bool ValidateInputs()
+        public bool ValidateInputs(List<IOption> options)
         {
-            if (string.IsNullOrEmpty(_mask))
+            var sourceDir = options.SingleOrDefault( x => x.OptionType == OptionTypes.SourceDirectory);
+            if (sourceDir is null)
             {
-                this._mask = "*.*";
-            }
-            if ( (this._fileAttribute & FileAttributes.Archive) == FileAttributes.Archive )
-            {
-                ConsoleLog.WriteError($">> Invalid FileAttribute argument, must be H, R or S");
+                ConsoleLog.WriteError($">> Invalid SourceDirectory option.");
                 return false;
             }
-            if (string.IsNullOrEmpty(_targetDir))
-            {
-                this._targetDir = ".";
-            }
+            _sourceDir = (sourceDir as PathOption).Data;
+
+            var mask = options.SingleOrDefault( x => x.OptionType == OptionTypes.FileMask);
+            _mask = mask is null ? "*.*" : (mask as TextOption).Data;
+
+            var recursive = options.SingleOrDefault( x => x.OptionType == OptionTypes.IncludeSubDirectories);
+            _recursive = recursive is null ? false : true;
+
+            var fileAttribute = options.SingleOrDefault( x => x.OptionType == OptionTypes.FileAttribute);
+            _fileAttribute = fileAttribute is null ? FileAttributes.Archive : (fileAttribute as FileAttributeOption).Data;
+
             return true;
         }
 
@@ -46,7 +50,7 @@ namespace img_tool.src
         {
             var sb = new StringBuilder();
             sb.AppendLine(">> DeleteByAttribute:");
-            sb.AppendLine($"   - target directory: {this._targetDir}");
+            sb.AppendLine($"   - target directory: {this._sourceDir}");
             sb.AppendLine($"   - file mask: {this._mask}");
             sb.AppendLine($"   - include sub directories: {this._recursive}");
             sb.AppendLine($"   - file attribute: {_fileAttribute.ToString()}");
@@ -55,12 +59,6 @@ namespace img_tool.src
 
         public void Run()
         {
-            if ( !ValidateInputs() )
-            {
-                ConsoleLog.WriteError($">> Invalid inputs, check command line");
-                return;
-            }
-
             ConsoleLog.WriteTask( this.ToString());
 
             var goAhead = ConsoleLog.AskToApprove($">> Confirm delete by attribute task (Y/N): ");
@@ -69,23 +67,18 @@ namespace img_tool.src
                 return;
             }
                         
-            var wildcards = _mask.Split( new char[] { ';', ',' });
-
-            var files = (from wc in wildcards
-                        let dirName = Path.GetDirectoryName(wc)
-                        let fileName = Path.GetFileName(wc)
-                        from file in Directory.EnumerateFiles(
-                            string.IsNullOrWhiteSpace(dirName) ? "." : dirName,
-                            string.IsNullOrWhiteSpace(fileName) ? "*.*" : fileName,
+            var files = (from file in Directory.EnumerateFiles(
+                            _sourceDir,
+                            _mask,
                             _recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly)
                         select file).ToList();
 
             if (files == null || files.Count() == 0)
             {
-                Console.WriteLine($"No files found in {_targetDir}");
+                ConsoleLog.WriteInfo($"No files found in '{_sourceDir}' with mask: '{_mask}'");
                 return;
             }
-            Console.WriteLine($"Found {files.Count()} files inside {_targetDir}");
+            ConsoleLog.WriteInfo($">>Found {files.Count()} files inside {_sourceDir}, with mask: '{_mask}'");
 
             Parallel.For(0, files.Count, index => 
             { 
@@ -95,7 +88,7 @@ namespace img_tool.src
                     try
                     {
                         //Win32ApiWrapper.MoveToRecycleBin(fi.FullName);
-                        Console.WriteLine($">>File '{fi.FullName}' has been deleted.");
+                        ConsoleLog.WriteInfo($">>File '{fi.FullName}' has been deleted, attribute: {_fileAttribute.ToString()}");
                     }
                     catch (AggregateException aex)
                     {

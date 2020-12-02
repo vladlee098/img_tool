@@ -34,12 +34,11 @@ namespace img_tool.src
         public string LineText { get; private set; }
         public virtual T Data { get; protected set; }
 
-        public OptionBase( string name, OptionTypes optionType, string lineText, T defaultValue)
+        public OptionBase( string name, OptionTypes optionType, string lineText)
         {
             Name = name;
             OptionType = optionType;
             LineText = lineText;
-            DefaultValue = defaultValue;
         }
 
         public abstract bool TryParse( string arg );

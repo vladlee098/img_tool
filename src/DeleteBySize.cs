@@ -10,56 +10,53 @@ namespace img_tool.src
 {
     public class DeleteBySize : ITask
     {
-        string _targetDir;
+        string _sourceDir;
         string _mask;
         bool _recursive;
         int _maxSize;
 
         public DeleteBySize( List<IOption> options )
         {
-            // Single will throw exception if not found, so validations must be done before task creation
-            _targetDir = (options.Single( x => x.OptionType == OptionTypes.TargetDirectory) as PathOption).Data;
-            _mask = (options.Single( x => x.OptionType == OptionTypes.FileMask) as TextOption).Data;
-            _recursive = (options.Single( x => x.OptionType == OptionTypes.IncludeSubDirectories) as FlagOption).Data;
-            _maxSize = (options.Single( x => x.OptionType == OptionTypes.MaxSizeKB) as NumberOption).Data;
+            if ( !ValidateInputs(options))
+            {
+                throw new ArgumentException( $"Provided options invalid for DeleteBySize, check command line");
+            }
         }
 
         public override string ToString()
         {
             var sb = new StringBuilder();
             sb.AppendLine(">> DeleteBySize:");
-            sb.AppendLine($"   - target directory: {this._targetDir}");
+            sb.AppendLine($"   - target directory: {this._sourceDir}");
             sb.AppendLine($"   - file mask: {this._mask}");
             sb.AppendLine($"   - include sub directories: {this._recursive}");
             sb.AppendLine($"   - max file size: {_maxSize}");
             return sb.ToString();
         }
 
-        public bool ValidateInputs()
+        public bool ValidateInputs(List<IOption> options)
         {
-            if (string.IsNullOrEmpty(_mask))
+            var sourceDir = options.SingleOrDefault( x => x.OptionType == OptionTypes.SourceDirectory);
+            if (sourceDir is null)
             {
-                this._mask = "*.*";
+                ConsoleLog.WriteError($">> Invalid SourceDirectory option.");
+                return false;
             }
-            if (this._maxSize <= 0)
-            {
-                this._maxSize = 1;
-            }
-            if (string.IsNullOrEmpty(_targetDir))
-            {
-                this._targetDir = ".";
-            }
-            return true;
-        }
+            _sourceDir = (sourceDir as PathOption).Data;
+
+            var mask = options.SingleOrDefault( x => x.OptionType == OptionTypes.FileMask);
+            _mask = mask is null ? "*.*" : (mask as TextOption).Data;
+
+            var recursive = options.SingleOrDefault( x => x.OptionType == OptionTypes.IncludeSubDirectories);
+            _recursive = recursive is null ? false : true;
+
+            var maxSize = options.SingleOrDefault( x => x.OptionType == OptionTypes.MaxSizeKB);
+            _maxSize = maxSize is null ? 1 : (maxSize as NumberOption).Data;
+
+            return true;        }
 
         public void Run()
         {
-            if ( !ValidateInputs() )
-            {
-                ConsoleLog.WriteError($">> Invalid inputs, check command line");
-                return;
-            }
-            
             ConsoleLog.WriteTask( this.ToString());
 
             var goAhead = ConsoleLog.AskToApprove($">> Confirm delete by attribute task (Y/N): ");
@@ -81,10 +78,10 @@ namespace img_tool.src
 
             if (files == null || files.Count() == 0)
             {
-                Console.WriteLine($"No files found in {_targetDir}");
+                ConsoleLog.WriteInfo($">> No files found in {_sourceDir}");
                 return;
             }
-            Console.WriteLine($"Found {files.Count()} files inside {_targetDir}");
+            ConsoleLog.WriteInfo($">> Found {files.Count()} files inside {_sourceDir}");
 
             Parallel.For(0, files.Count, index => 
             { 
@@ -94,14 +91,15 @@ namespace img_tool.src
                     try
                     {
                         //Win32ApiWrapper.MoveToRecycleBin(fi.FullName);
-                        Console.WriteLine($">>File '{fi.FullName}' has been deleted.");
+                        ConsoleLog.WriteInfo($">> File '{fi.FullName}' has been deleted, size: {fi.Length / 1024}KB");
+                    }
+                    catch (AggregateException aex)
+                    {
+                        ConsoleLog.WriteError($"Error while deleting '{files[index]}': {aex.Message}");
                     }
                     catch (IOException ex)
                     {
-                        var saved = Console.ForegroundColor;
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine($"Error while deleting '{files[index]}': {ex.Message}");
-                        Console.ForegroundColor = saved;
+                        ConsoleLog.WriteError($"Error while deleting '{files[index]}': {ex.Message}");
                     }
                 }
             } );           

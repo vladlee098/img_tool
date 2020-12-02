@@ -23,5 +23,6 @@
     <Content Include="src\OptionBase.cs" />
     <Content Include="src\OptionFactory.cs" />
     <Content Include="src\IOption.cs" />
+    <Content Include="src\Options.cs" />
   </ItemGroup>
 </Project>

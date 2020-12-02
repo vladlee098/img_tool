@@ -1,11 +1,12 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace img_tool.src
 {
     public enum TaskTypes
     {
-        RenameByDateMask,
+        RenameByDate,
         SetFileDate,
         DeleteBySize,
         DeleteByAttribute
@@ -15,7 +16,7 @@ namespace img_tool.src
     public interface ITask
     {
         void Run();
-        bool ValidateInputs();
+        bool ValidateInputs(List<IOption> options);
 
     }
 }
