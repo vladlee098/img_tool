@@ -8,56 +8,31 @@ namespace img_tool.src
     public class ArgParser
     {
 
-        static List<String> Commands = new List<String> { "rd", "ds", "da"};
-
-        static TaskTypes GetTaskType( string arg )
-        {
-            if ( arg == "rd")
-            {
-                return TaskTypes.RenameByDate;
-            }
-            else if ( arg == "ds")
-            {
-                return TaskTypes.DeleteBySize;
-            }
-            else if ( arg == "da")
-            {
-                return TaskTypes.DeleteByAttribute;
-            }
-            throw new Exception("Wrong command type");
-        }
-
-        public static ITask ParseCommandLine( string[] args )
+        public static (SortedList<int, ITask>, List<IOption>) Parse( string[] args )
         {
             // parse commands
             if (args.Length == 0)
             {
                 ConsoleLog.WriteError($">> No arguments.");
-                return null;
+                return (null, null);
             }
                         
-            //var arguments = args.Split(' ');
-            var tasks = new List<TaskTypes>();
+            var taskTypes = new List<TaskTypes>();
             var options = new List<IOption>();
 
             foreach( var arg in args)
             {
-                if ( Commands.Contains(arg) )
+                var command = Commands.TryGetCommand( arg );
+                if ( command is not null )
                 {
-                    tasks.Add( GetTaskType( arg ));
+                    taskTypes.Add( command.TaskType );
                 }
             }
 
-            if (tasks.Count == 0)
+            if (taskTypes.Count == 0)
             {
                 ConsoleLog.WriteError($">> No commands found in arguments.");
-                return null;
-            }            
-
-            if (tasks.Count > 1)
-            {
-                ConsoleLog.WriteError($">> This version can onply process one task at a time.");
-                return null;
+                return (null, null);
             }            
 
             // parse options
@@ -71,7 +46,7 @@ namespace img_tool.src
                 options.Add(option);
             }
 
-            return ( TaskFactory.CreateTask(tasks[0], options) );
+            return ( TaskFactory.CreateTasks(taskTypes, options), options );
         }
     }
 }

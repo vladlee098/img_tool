@@ -24,5 +24,9 @@
     <Content Include="src\OptionFactory.cs" />
     <Content Include="src\IOption.cs" />
     <Content Include="src\Options.cs" />
+    <Content Include="src\FileProcessor.cs" />
+    <Content Include="src\Commands.cs" />
+    <Content Include="src\SetFileCreateDate.cs" />
+    <Content Include="src\TaskProcessor.cs" />
   </ItemGroup>
 </Project>

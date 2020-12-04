@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace img_tool.src
@@ -15,8 +16,8 @@ namespace img_tool.src
     
     public interface ITask
     {
-        void Run();
-        bool ValidateInputs(List<IOption> options);
+        void Apply( FileInfo file );
+        bool Validate(List<IOption> options);
 
     }
 }

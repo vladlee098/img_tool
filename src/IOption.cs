@@ -8,8 +8,8 @@ namespace img_tool.src
     {
         FileMask,
         DatePattern,
-        SetCreationDate,
-        SetLastWriteDate,
+        CreationDate,
+        LastWriteDate,
         MaxSizeKB,
         SourceDirectory,
         TargetDirectory,

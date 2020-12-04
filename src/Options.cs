@@ -119,4 +119,27 @@ namespace img_tool.src
             return true;
         }
     }
+
+    public class DateOption : OptionBase<DateTime>
+    {
+        public DateOption(string name, OptionTypes optionType, string lineText ) : base( name, optionType, lineText)
+        {
+        }
+
+        public override bool TryParse( string arg )      
+        {
+            var arr = arg.Split(':');
+            if (arr.Length == 2)
+            {
+                DateTime val;
+                if ( DateTime.TryParse( arr[1], out val) )
+                {
+                    Data = val; 
+                    return true;
+                }
+                return false;
+            }
+            return false;
+        }
+    }    
 }

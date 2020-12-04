@@ -13,8 +13,8 @@ namespace img_tool.src
         {
             _options.Add( new TextOption( "FileSearch", OptionTypes.FileMask, "-f") );
             _options.Add( new TextOption( "DatePattern", OptionTypes.DatePattern, "-p") );
-            _options.Add( new FlagOption( "SetCreationDate", OptionTypes.SetCreationDate, "-c") );
-            _options.Add( new FlagOption( "SetLastWriteDate", OptionTypes.SetLastWriteDate, "-w") );
+            _options.Add( new DateOption( "SetCreationDate", OptionTypes.CreationDate, "-c") );
+            _options.Add( new FlagOption( "SetLastWriteDate", OptionTypes.LastWriteDate, "-w") );
             _options.Add( new NumberOption( "MaxSizeKB", OptionTypes.MaxSizeKB, "-z") );
             _options.Add( new PathOption( "SourceDirectory", OptionTypes.SourceDirectory, "-i") );
             //_options.Add( new PathOption( "TargetDirectory", OptionTypes.TargetDirectory, "-t") );
