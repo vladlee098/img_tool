@@ -16,7 +16,7 @@ namespace img_tool.src
             Console.WriteLine("Commands:");
             Console.WriteLine("  rd: rename file by date mask");
             Console.WriteLine("  cd: set file create date");
-            Console.WriteLine("  ds: delete files smaller then specified size (KB)");
+            Console.WriteLine("  ds: delete files smaller than specified size (KB)");
             Console.WriteLine("  da: delete files by attribute (H|R|S)");
             Console.WriteLine("Options:");
             Console.WriteLine(" -i: source directory");
@@ -35,21 +35,14 @@ namespace img_tool.src
             Console.WriteLine("------------------------------------------------------------------------");
             Console.WriteLine("Utility to rename, set creation date or delete files");
             Console.WriteLine("------------------------------------------------------------------------");
-                     
-            //string[] testArgs = new string[] { "rd", "-d" , "-i"};
-            //string[] testArgs = new string[] { "da", @"-i:e:\@@@test\Liza's birthday" , "-w", ""};
-            //string[] byAttrArgs = new string[] { "da", @"-i:e:\@@@test\Liza's birthday" , "-w", "-a:H", "-f:*Rot*"};
-            //string[] bySizeArgs = new string[] { "ds", @"-i:e:\@@@test\Liza's birthday" , "-z:5", "-r", "-w", "-f:*Rot*"};
-
-            string[] bySizeArgs = new string[] { "ds", @"-i:e:\@@@test\Liza's birthday" , "-z:5", "-r", "-w", "-f:*Rot*"};
 
             try
             {
-                var (tasks, options) = ArgParser.Parse(bySizeArgs);
+                var (tasks, options) = ArgParser.Parse(args);
                 if (tasks is null || options is null)
                 {
                     PrintUsage();
-                    return;
+                    return; 
                 }
 
                 var processor = new TaskProcessor(options);
