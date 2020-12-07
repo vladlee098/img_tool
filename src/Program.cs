@@ -14,19 +14,21 @@ namespace img_tool.src
             Console.WriteLine("Usage:");
             Console.WriteLine("img_tool <CMD> <OPTIONS>");
             Console.WriteLine("Commands:");
-            Console.WriteLine("  rd: rename file by date mask");
+            Console.WriteLine("  rd: rename file");
             Console.WriteLine("  cd: set file create date");
             Console.WriteLine("  ds: delete files smaller than specified size (KB)");
             Console.WriteLine("  da: delete files by attribute (H|R|S)");
             Console.WriteLine("Options:");
             Console.WriteLine(" -i: source directory");
-            Console.WriteLine(" -t: destination directory");
-            Console.WriteLine(" -fm: file search mask");
-            Console.WriteLine(" -dm: date mask applied to file names");
-            Console.WriteLine(" -r: include sub directories");
-            Console.WriteLine(" -z: max file size in KB (1KB = 1024 bytes)");
+            //Console.WriteLine(" -t: destination directory");
+            Console.WriteLine(" -f: file search mask");
+            Console.WriteLine(" -d: file name prefix applied to file names plus index");
             Console.WriteLine(" -c: set create file date");
             Console.WriteLine(" -w: set last write file date");
+            Console.WriteLine(" -z: max file size in KB (1KB = 1024 bytes)");
+            Console.WriteLine(" -r: include sub directories");
+            Console.WriteLine(" -a: file attribute (H|R|S) only");
+            Console.WriteLine(" -force: forced action, no confirmation");
             Console.WriteLine("------------------------------------------------------------------------");
         }
 
@@ -38,7 +40,9 @@ namespace img_tool.src
 
             try
             {
-                var (tasks, options) = ArgParser.Parse(args);
+                string[] testArgs = new string[] { "cd", "-c:1999-01-01" , @"-i:e:\@@@test", "-f:*Rot*" };
+
+                var (tasks, options) = ArgParser.Parse(testArgs);
                 if (tasks is null || options is null)
                 {
                     PrintUsage();

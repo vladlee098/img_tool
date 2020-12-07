@@ -11,8 +11,8 @@ namespace img_tool.src
 
         static OptionFactory()
         {
-            _options.Add( new TextOption( "FileSearch", OptionTypes.FileMask, "-f") );
-            _options.Add( new TextOption( "DatePattern", OptionTypes.DatePattern, "-p") );
+            _options.Add( new TextOption( "FileMask", OptionTypes.FileMask, "-f") );
+            _options.Add( new TextOption( "FileNamePrefix", OptionTypes.FileName, "-d") );
             _options.Add( new DateOption( "SetCreationDate", OptionTypes.CreationDate, "-c") );
             _options.Add( new FlagOption( "SetLastWriteDate", OptionTypes.LastWriteDate, "-w") );
             _options.Add( new NumberOption( "MaxSizeKB", OptionTypes.MaxSizeKB, "-z") );

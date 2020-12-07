@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace img_tool.src
 {
-    public class SetFileCreateDate : ITask
+    public class SetCreateDate : ITask
     {
-        DateTime _createDate;
+        DateTime _datePattern;
 
-        public SetFileCreateDate( List<IOption> options )
+        public SetCreateDate( List<IOption> options )
         {
             if ( !Validate(options))
             {
@@ -22,20 +22,21 @@ namespace img_tool.src
 
         public bool Validate(List<IOption> options)
         {
-            var createDate = options.SingleOrDefault( x => x.OptionType == OptionTypes.CreationDate);
-            if (createDate is null)
+            var datePattern = options.SingleOrDefault( x => x.OptionType == OptionTypes.CreationDate);
+            if (datePattern is null)
             {
                 ConsoleLog.WriteError($">> CreateDate option must be provided for SetFileCreateDate");
+                return false;
             }
-            _createDate = (createDate as DateOption).Data;
+            _datePattern = (datePattern as DateOption).Data;
             return true;        
         }
 
-        public void Apply( FileInfo file )
+        public void Apply( FileInfo file, int index )
         {
-            file.CreationTime = _createDate;
+            file.CreationTime = _datePattern;
             //File.SetLastWriteTime(file, outDate);
-            ConsoleLog.WriteInfo($">> File '{file.FullName}' has been updated, create date now is: {_createDate}");
+            ConsoleLog.WriteInfo($">> File '{file.FullName}' has been updated, create date now is: {_datePattern}");
         }
     }
 }

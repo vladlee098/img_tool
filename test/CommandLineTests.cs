@@ -18,20 +18,28 @@ namespace img_tool.test
             Assert.AreEqual( 5, options.Count);
         }
 
-        [Test]
-        public void DeleteBySize_NoSourceDir()
-        {
-            string[] bySizeArgs = new string[] { "ds", "da", "-z:5", "-r", "-w", "-f:*Rot*"};
+        // [Test]
+        // public void DeleteBySize_NoSourceDir()
+        // {
+        //     string[] bySizeArgs = new string[] { "ds", "da", "-z:5", "-r", "-w", "-f:*Rot*"};
 
-            var (tasks, options) = ArgParser.Parse(bySizeArgs);
-            Assert.AreEqual( 1, tasks.Count);
-            Assert.AreEqual( 5, options.Count);
-        }
+        //     var (tasks, options) = ArgParser.Parse(bySizeArgs);
+        //     Assert.AreEqual( 1, tasks.Count);
+        //     Assert.AreEqual( 5, options.Count);
+        // }
 
         [Test]
         public void DeleteBySize_InvalidSourceDir()
         {
             string[] testArgs = new string[] { "rd", "-d" , "-i"};
+
+            Assert.Throws<ArgumentException>(() => ArgParser.Parse(testArgs));
+        }
+
+        [Test]
+        public void SetFileCreateDate_NoDateError()
+        {
+            string[] testArgs = new string[] { "cd", "-d" , @"-i:e:\@@@test", "-f:*Rot*" };
 
             Assert.Throws<ArgumentException>(() => ArgParser.Parse(testArgs));
         }

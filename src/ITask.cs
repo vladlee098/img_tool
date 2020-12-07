@@ -16,7 +16,7 @@ namespace img_tool.src
     
     public interface ITask
     {
-        void Apply( FileInfo file );
+        void Apply( FileInfo file, int index );
         bool Validate(List<IOption> options);
 
     }

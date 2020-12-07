@@ -43,7 +43,7 @@ namespace img_tool.src
         //     return sb.ToString();
         // }
 
-        public void Apply( FileInfo file )
+        public void Apply(FileInfo file, int index)
         {
             if ((file.Attributes & _fileAttribute) == _fileAttribute)
             {
@@ -60,7 +60,6 @@ namespace img_tool.src
                 {
                     ConsoleLog.WriteError($"Error while deleting '{file.FullName}': {ex.Message}");
                 }
-            }        
-        }
+            }                }
     }
 }

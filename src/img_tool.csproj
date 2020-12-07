@@ -28,5 +28,7 @@
     <Content Include="Commands.cs" />
     <Content Include="SetFileCreateDate.cs" />
     <Content Include="TaskProcessor.cs" />
+    <Content Include="RenameFile.cs" />
+    <Content Include="SetCreateDate.cs" />
   </ItemGroup>
 </Project>

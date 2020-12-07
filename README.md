@@ -9,4 +9,4 @@
 - rename by date mask
 - set file create date
 
-## NOT FULLY COMPLETED YET 
+## WORK IN PROGRESS

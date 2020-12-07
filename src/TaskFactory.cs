@@ -30,10 +30,10 @@ namespace img_tool.src
             // {
             //     return new RenameByMask(_parser);
             // }
-            // else if ( taskType == TaskTypes.SetFileDate)
-            // {
-            //     throw new NotImplementedException();
-            // }
+            else if ( taskType == TaskTypes.SetFileDate)
+            {
+                return new SetCreateDate(options);
+            }
             throw new NotImplementedException();
         }        
     }

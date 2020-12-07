@@ -97,7 +97,7 @@ namespace img_tool.src
 
             Parallel.For(0, files.Count, index => 
             { 
-                var processor = new FileProcessor( tasks, files[index]);
+                var processor = new FileProcessor( tasks, files[index], index);
                 processor.ApplyTasks();
             } );           
         }        

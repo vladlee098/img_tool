@@ -10,13 +10,15 @@ namespace img_tool.src
     {
         readonly SortedList<int, ITask> _tasks;
         readonly string _file;
+        readonly int _index;
         
-        public FileProcessor(SortedList<int, ITask> tasks, string file)
+        public FileProcessor(SortedList<int, ITask> tasks, string file, int index)
         {
             _tasks = tasks;
             _file = file;
+            _index = index;
         }
-
+        
         public void ApplyTasks()
         {
             try
@@ -31,7 +33,7 @@ namespace img_tool.src
                     
                     if ( _tasks.ContainsKey(priority) )
                     {
-                        _tasks[priority].Apply(fileInfo);
+                        _tasks[priority].Apply(fileInfo, _index);
                     }
                     else
                     {

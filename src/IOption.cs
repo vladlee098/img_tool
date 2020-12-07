@@ -7,7 +7,7 @@ namespace img_tool.src
     public enum OptionTypes
     {
         FileMask,
-        DatePattern,
+        FileName,
         CreationDate,
         LastWriteDate,
         MaxSizeKB,

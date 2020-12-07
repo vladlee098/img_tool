@@ -43,7 +43,7 @@ namespace img_tool.src
             return true;        
         }
 
-        public void Apply( FileInfo file )
+        public void Apply( FileInfo file, int index )
         {
             if ((file.Length / 1024) < _maxSize)
             {
