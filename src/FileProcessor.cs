@@ -23,13 +23,13 @@ namespace img_tool.src
         {
             try
             {
-                //ConsoleLog.WriteInfo($"Task count: {_tasks.Count}");
+                ConsoleLog.WriteInfo($"Task count: {_tasks.Count}");
                 var fileInfo = new FileInfo(_file);
 
-                //ConsoleLog.WriteInfo($"Thread: {Thread.CurrentThread.GetHashCode()}");
-                for( int priority = 1; priority <= _tasks.Count; priority++ ) 
+                ConsoleLog.WriteInfo($"Thread: {Thread.CurrentThread.GetHashCode()}");
+                foreach( int priority in _tasks.Keys)
                 {
-                    //ConsoleLog.WriteInfo($"Thread: {Thread.CurrentThread.GetHashCode()}, priority: {priority} - STARTING...");
+                    ConsoleLog.WriteInfo($"Thread: {Thread.CurrentThread.GetHashCode()}, priority: {priority} - STARTING...");
                     
                     if ( _tasks.ContainsKey(priority) )
                     {
@@ -37,11 +37,12 @@ namespace img_tool.src
                     }
                     else
                     {
-                        //ConsoleLog.WriteInfo($"Thread: {Thread.CurrentThread.GetHashCode()}, priority: {priority} - KEY NOT FOUND...");
-                        //ConsoleLog.WriteInfo($"Thread: {Thread.CurrentThread.GetHashCode()}, first task: {_tasks.Keys[0]}");
+                        ConsoleLog.WriteInfo($"Thread: {Thread.CurrentThread.GetHashCode()}, priority: {priority} - KEY NOT FOUND...");
+                        ConsoleLog.WriteInfo($"Thread: {Thread.CurrentThread.GetHashCode()}, first task: {_tasks.Keys[0]}");
                     }
-                    //ConsoleLog.WriteInfo($"Thread: {Thread.CurrentThread.GetHashCode()}, priority: {priority} - DONE");
-                }            
+                    ConsoleLog.WriteInfo($"Thread: {Thread.CurrentThread.GetHashCode()}, priority: {priority} - DONE");
+
+                }
             }
             catch (AggregateException aex)
             {

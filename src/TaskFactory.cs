@@ -26,10 +26,10 @@ namespace img_tool.src
             {
                 return new DeleteBySize(options);
             }
-            // else if ( taskType == TaskTypes.RenameByDateMask)
-            // {
-            //     return new RenameByMask(_parser);
-            // }
+            else if ( taskType == TaskTypes.RenameFile)
+            {
+                return new RenameFile(options);
+            }
             else if ( taskType == TaskTypes.SetFileDate)
             {
                 return new SetCreateDate(options);

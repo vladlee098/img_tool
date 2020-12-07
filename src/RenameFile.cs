@@ -22,7 +22,7 @@ namespace img_tool.src
 
         public bool Validate(List<IOption> options)
         {
-            var mask = options.SingleOrDefault( x => x.OptionType == OptionTypes.FileMask);
+            var mask = options.SingleOrDefault( x => x.OptionType == OptionTypes.FileName);
             if (mask is null)
             {
                 ConsoleLog.WriteError($">> Mask option must be provided for RenameByMask");
@@ -35,9 +35,9 @@ namespace img_tool.src
         public void Apply( FileInfo file, int index )
         {
             var oldName = file.Name;
-            var newPath = Path.Combine( file.DirectoryName, _mask + "-" + index.ToString("000d") + file.Extension);
+            var newPath = Path.Combine( file.DirectoryName, _mask + "-" + index.ToString("0000") + file.Extension);
             //file.MoveTo( newPath );
-            ConsoleLog.WriteInfo($">> File '{oldName}' has been renamed to: {file.Name}");
+            ConsoleLog.WriteInfo($">> File '{oldName}' has been renamed to: {newPath}");
         }
     }
 }

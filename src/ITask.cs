@@ -7,7 +7,7 @@ namespace img_tool.src
 {
     public enum TaskTypes
     {
-        RenameByDate,
+        RenameFile,
         SetFileDate,
         DeleteBySize,
         DeleteByAttribute

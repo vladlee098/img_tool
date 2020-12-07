@@ -40,7 +40,8 @@ namespace img_tool.src
 
             try
             {
-                string[] testArgs = new string[] { "cd", "-c:1999-01-01" , @"-i:e:\@@@test", "-f:*Rot*" };
+                //string[] testArgs = new string[] { "cd", "-c:1999-01-01" , @"-i:e:\@@@test", "-f:*Rot*", "-r"};
+                string[] testArgs = new string[] { "rd", "-d:1999-01-01" , @"-i:e:\@@@test", "-f:*Rot*", "-r"};
 
                 var (tasks, options) = ArgParser.Parse(testArgs);
                 if (tasks is null || options is null)

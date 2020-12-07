@@ -26,7 +26,7 @@ namespace img_tool.src
         static List<Command> Current = new List<Command> 
         { 
             new Command( "cd", 1, TaskTypes.SetFileDate ), 
-            new Command( "rd", 2, TaskTypes.RenameByDate ), 
+            new Command( "rd", 2, TaskTypes.RenameFile ), 
             new Command( "ds", 3, TaskTypes.DeleteBySize ), 
             new Command( "da", 4, TaskTypes.DeleteByAttribute ), 
         };
