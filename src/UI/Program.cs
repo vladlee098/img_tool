@@ -23,8 +23,7 @@ namespace img_tool.src
             Console.WriteLine(" -i: source directory");
             Console.WriteLine(" -f: file search mask");
             Console.WriteLine(" -d: file name prefix applied to file names plus index");
-            Console.WriteLine(" -c: set create file date");
-            Console.WriteLine(" -w: set last write file date");
+            Console.WriteLine(" -c: create file date, must be a valid date, format: 'YYYY-MM-DD'");
             Console.WriteLine(" -z: max file size in KB (1KB = 1024 bytes)");
             Console.WriteLine(" -r: include sub directories");
             Console.WriteLine(" -a: file attribute (H|R|S) only");

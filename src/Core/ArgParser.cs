@@ -38,7 +38,7 @@ namespace img_tool.src.Core
 
             if ( !taskValidator.ValidateTasks(taskTypes) )
             {
-                return (null, null);
+                throw new ArgumentException( $"Provided commands are invalid, check command line");
             }            
 
             return ( TaskFactory.CreateTasks(taskTypes, options), options );

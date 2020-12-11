@@ -15,10 +15,8 @@ namespace img_tool.src.Core
             _options.Add( new TextOption( "FileMask", OptionTypes.FileMask, "-f") );
             _options.Add( new TextOption( "FileNamePrefix", OptionTypes.FileName, "-d") );
             _options.Add( new DateOption( "SetCreationDate", OptionTypes.CreationDate, "-c") );
-            _options.Add( new FlagOption( "SetLastWriteDate", OptionTypes.LastWriteDate, "-w") );
             _options.Add( new NumberOption( "MaxSizeKB", OptionTypes.MaxSizeKB, "-z") );
             _options.Add( new PathOption( "SourceDirectory", OptionTypes.SourceDirectory, "-i") );
-            //_options.Add( new PathOption( "TargetDirectory", OptionTypes.TargetDirectory, "-t") );
             _options.Add( new FlagOption( "No questions asked, applies action silently", OptionTypes.Force, "-force") );
             _options.Add( new FlagOption( "Provides additional output to the console", OptionTypes.Verbose, "-verbose") );
             _options.Add( new FlagOption( "Does not apply action, just shows output", OptionTypes.Test, "-test") );

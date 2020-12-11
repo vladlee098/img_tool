@@ -2,8 +2,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <PlatformTarget>x64</PlatformTarget>
-    <RuntimeIdentifier>win10-x64</RuntimeIdentifier>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
@@ -15,5 +13,7 @@
     <ProjectReference Include="..\src\Shared\Shared.csproj" />
     <ProjectReference Include="..\src\Core\Core.csproj" />
     <ProjectReference Include="..\src\Interfaces\Interfaces.csproj" />
+    <Content Include="ArgParserTests.cs" />
+    <Content Include="TaskValidatorTests.cs" />
   </ItemGroup>
 </Project>
