@@ -32,7 +32,7 @@ namespace img_tool.src.Core
                 
                 if (_verbose)
                 {
-                    ConsoleLog.WriteInfo($"Task count: {_tasks.Count}");
+                    //ConsoleLog.WriteInfo($"Task count: {_tasks.Count}");
                 }
                 var fileInfo = new FileInfo(_file);
 

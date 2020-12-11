@@ -13,7 +13,7 @@ namespace img_tool.test
         {
             string[] bySizeArgs = new string[] { "ds", @"-i:e:\@@@test" , "-z:5", "-r", "-w", "-f:*Rot*"};
 
-            var (tasks, options) = ArgParser.Parse(bySizeArgs);
+            var (tasks, options) = ArgParser.Parse(bySizeArgs, new TaskValidator());
             Assert.AreEqual( 1, tasks.Count);
             Assert.AreEqual( 5, options.Count);
         }
@@ -23,7 +23,7 @@ namespace img_tool.test
         {
             string[] bySizeArgs = new string[] { "ds", "da", "-z:5", "-r", "-w", "-f:*Rot*"};
 
-            var (tasks, options) = ArgParser.Parse(bySizeArgs);
+            var (tasks, options) = ArgParser.Parse(bySizeArgs, new TaskValidator());
             Assert.AreEqual( 1, tasks.Count);
             Assert.AreEqual( 5, options.Count);
         }
@@ -33,7 +33,7 @@ namespace img_tool.test
         {
             string[] testArgs = new string[] { "rd", "-d" , "-i"};
 
-            Assert.Throws<ArgumentException>(() => ArgParser.Parse(testArgs));
+            Assert.Throws<ArgumentException>(() => ArgParser.Parse(testArgs, new TaskValidator()));
         }
 
         [Test]
@@ -41,7 +41,7 @@ namespace img_tool.test
         {
             string[] testArgs = new string[] { "cd", "-d" , @"-i:e:\@@@test", "-f:*Rot*" };
 
-            Assert.Throws<ArgumentException>(() => ArgParser.Parse(testArgs));
+            Assert.Throws<ArgumentException>(() => ArgParser.Parse(testArgs, new TaskValidator() ));
         }
     }
 }

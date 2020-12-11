@@ -7,7 +7,7 @@ namespace img_tool.src.Core
 {
     public class ArgParser
     {
-        public static (SortedList<int, ITask>, List<IOption>) Parse( string[] args )
+        public static (SortedList<int, ITask>, List<IOption>) Parse( string[] args, ITaskValidator taskValidator )
         {
             // parse commands
             if (args.Length == 0)
@@ -36,13 +36,13 @@ namespace img_tool.src.Core
                 }
             }
 
-            if (taskTypes.Count == 0)
+            if ( !taskValidator.ValidateTasks(taskTypes) )
             {
-                ConsoleLog.WriteError($">> No commands found in arguments.");
                 return (null, null);
             }            
 
             return ( TaskFactory.CreateTasks(taskTypes, options), options );
         }
+
     }
 }

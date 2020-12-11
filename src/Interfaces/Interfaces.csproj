@@ -10,5 +10,6 @@
     <Content Include="ITask.cs" />
     <Content Include="OptionReaderBase.cs" />
     <Content Include="OptionBase.cs" />
+    <Content Include="ITaskValidator.cs" />
   </ItemGroup>
 </Project>
