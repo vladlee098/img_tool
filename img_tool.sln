@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "img_tool", "src\img_tool.csproj", "{6F68DAF6-5447-4EBB-B19A-8E27F04AAB0F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "img_tool", "src\UI\UI.csproj", "{6F68DAF6-5447-4EBB-B19A-8E27F04AAB0F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "test\test.csproj", "{2AF3C7E5-618F-4B24-B2F2-B3869CB268EC}"
 EndProject

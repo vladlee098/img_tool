@@ -1,5 +1,5 @@
 ﻿using System;
-using img_tool.src;
+using img_tool.src.Core;
 using NUnit.Framework;
 
 namespace img_tool.test
@@ -18,15 +18,15 @@ namespace img_tool.test
             Assert.AreEqual( 5, options.Count);
         }
 
-        // [Test]
-        // public void DeleteBySize_NoSourceDir()
-        // {
-        //     string[] bySizeArgs = new string[] { "ds", "da", "-z:5", "-r", "-w", "-f:*Rot*"};
+        [Test]
+        public void DeleteBySize_NoSourceDir()
+        {
+            string[] bySizeArgs = new string[] { "ds", "da", "-z:5", "-r", "-w", "-f:*Rot*"};
 
-        //     var (tasks, options) = ArgParser.Parse(bySizeArgs);
-        //     Assert.AreEqual( 1, tasks.Count);
-        //     Assert.AreEqual( 5, options.Count);
-        // }
+            var (tasks, options) = ArgParser.Parse(bySizeArgs);
+            Assert.AreEqual( 1, tasks.Count);
+            Assert.AreEqual( 5, options.Count);
+        }
 
         [Test]
         public void DeleteBySize_InvalidSourceDir()

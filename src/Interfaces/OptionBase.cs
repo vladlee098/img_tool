@@ -1,29 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-
-namespace img_tool.src
+namespace img_tool.src.Interfaces
 {
-    public enum OptionTypes
-    {
-        FileMask,
-        FileName,
-        CreationDate,
-        LastWriteDate,
-        MaxSizeKB,
-        SourceDirectory,
-        TargetDirectory,
-        IncludeSubDirectories,
-        FileAttribute
-    };
-
-    public interface IOption
-    {
-        string LineText { get; }
-        OptionTypes OptionType { get; }
-        bool TryParse( string arg );   
-    }
-
     public abstract class OptionBase<T> : IOption
     {
         protected bool _dataParsed = false;

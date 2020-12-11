@@ -5,25 +5,25 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using img_tool.src.Interfaces;
+using img_tool.src.Shared;
 
-namespace img_tool.src
+namespace img_tool.src.Core
 {
-    public class TaskProcessor
+    public class TaskProcessor : OptionReader
     {
         string _sourceDir;
         string _fileMask;
         bool _recursive;
+        readonly IFileProcessorFactory _processorFactory;
 
-        readonly List<IOption> _globalOptions;
-
-        public TaskProcessor( List<IOption> options)
+        public TaskProcessor( List<IOption> options, IFileProcessorFactory processorFactory) : base(options)
         {
-            if ( !Validate(options))
+            _processorFactory = processorFactory;
+            if ( !ReadOptions(options))
             {
                 throw new ArgumentException( $"Provided options are invalid, check command line");
             }
-            
-            _globalOptions = options;
         }
 
         private string TasksToString( SortedList<int, ITask> tasks )
@@ -47,13 +47,13 @@ namespace img_tool.src
             sb.AppendLine(">> Processing tasks:");
             sb.AppendLine($"   - {TasksToString(tasks)}");
             sb.AppendLine(">> Paramerters:");
-            sb.AppendLine($"   - target directory: {this._sourceDir}");
+            sb.AppendLine($"   - source directory: {this._sourceDir}");
             sb.AppendLine($"   - file mask: {this._fileMask}");
             sb.AppendLine($"   - include sub directories: {this._recursive}");
             return sb.ToString();
         }
         
-        public bool Validate(List<IOption> options)
+        protected override bool ReadOptions(List<IOption> options)
         {
             var sourceDir = options.SingleOrDefault( x => x.OptionType == OptionTypes.SourceDirectory);
             if (sourceDir is null)
@@ -69,17 +69,23 @@ namespace img_tool.src
             var recursive = options.SingleOrDefault( x => x.OptionType == OptionTypes.IncludeSubDirectories);
             _recursive = recursive is null ? false : true;
 
-            return true;        
+            return base.ReadOptions(options);
         }
 
         public void Execute( SortedList<int, ITask> tasks)
         {
-            ConsoleLog.WriteTask( this.ToString(tasks));
-
-            var goAhead = ConsoleLog.AskToApprove($">> Confirm delete by attribute task (Y/N): ");
-            if (!goAhead)
+            if (_verbose)            
             {
-                return;
+                ConsoleLog.WriteTask( this.ToString(tasks));
+            }
+            
+            if (!_force)
+            {
+                var goAhead = ConsoleLog.AskToApprove($">> Confirm delete by attribute task (Y/N): ");
+                if (!goAhead)
+                {
+                    return;
+                }
             }
                         
             var files = (from file in Directory.EnumerateFiles(
@@ -97,7 +103,7 @@ namespace img_tool.src
 
             Parallel.For(0, files.Count, index => 
             { 
-                var processor = new FileProcessor( tasks, files[index], index);
+                var processor = _processorFactory.Create( tasks, files[index], index, _verbose, _force, _test);
                 processor.ApplyTasks();
             } );           
         }        

@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using img_tool.src.Interfaces;
 
-namespace img_tool.src
+namespace img_tool.src.Core
 {
     public class OptionFactory
     {
@@ -18,7 +19,9 @@ namespace img_tool.src
             _options.Add( new NumberOption( "MaxSizeKB", OptionTypes.MaxSizeKB, "-z") );
             _options.Add( new PathOption( "SourceDirectory", OptionTypes.SourceDirectory, "-i") );
             //_options.Add( new PathOption( "TargetDirectory", OptionTypes.TargetDirectory, "-t") );
-            _options.Add( new FlagOption( "No questions asked, just delete", OptionTypes.IncludeSubDirectories, "-force") );
+            _options.Add( new FlagOption( "No questions asked, applies action silently", OptionTypes.Force, "-force") );
+            _options.Add( new FlagOption( "Provides additional output to the console", OptionTypes.Verbose, "-verbose") );
+            _options.Add( new FlagOption( "Does not apply action, just shows output", OptionTypes.Test, "-test") );
             _options.Add( new FlagOption( "IncludeSubDirectories", OptionTypes.IncludeSubDirectories, "-r") );
             _options.Add( new FileAttributeOption( "FileAttribute", OptionTypes.FileAttribute, "-a") );
         }

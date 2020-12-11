@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Linq;
+using img_tool.src.Core;
+using img_tool.src.Shared;
 
 namespace img_tool.src
 {
@@ -20,7 +21,6 @@ namespace img_tool.src
             Console.WriteLine("  da: delete files by attribute (H|R|S)");
             Console.WriteLine("Options:");
             Console.WriteLine(" -i: source directory");
-            //Console.WriteLine(" -t: destination directory");
             Console.WriteLine(" -f: file search mask");
             Console.WriteLine(" -d: file name prefix applied to file names plus index");
             Console.WriteLine(" -c: set create file date");
@@ -29,6 +29,8 @@ namespace img_tool.src
             Console.WriteLine(" -r: include sub directories");
             Console.WriteLine(" -a: file attribute (H|R|S) only");
             Console.WriteLine(" -force: forced action, no confirmation");
+            Console.WriteLine(" -test: will not apply action, just output affected files");
+            Console.WriteLine(" -verbose: forced action, no confirmation");
             Console.WriteLine("------------------------------------------------------------------------");
         }
 
@@ -41,7 +43,8 @@ namespace img_tool.src
             try
             {
                 //string[] testArgs = new string[] { "cd", "-c:1999-01-01" , @"-i:e:\@@@test", "-f:*Rot*", "-r"};
-                string[] testArgs = new string[] { "rd", "-d:1999-01-01" , @"-i:e:\@@@test", "-f:*Rot*", "-r"};
+                //string[] testArgs = new string[] { "rd", "-d:1999-01-01" , @"-i:e:\@@@test", "-f:*Rot*", "-r"};
+                string[] testArgs = new string[] { "ds", "da", "-z:5", "-r", "-w", @"-i:e:\@@@test", "-f:*Rot*", "-test", "-verbose"};
 
                 var (tasks, options) = ArgParser.Parse(testArgs);
                 if (tasks is null || options is null)
@@ -50,7 +53,7 @@ namespace img_tool.src
                     return; 
                 }
 
-                var processor = new TaskProcessor(options);
+                var processor = new TaskProcessor(options, new FileProcessorFactory() );
                 processor.Execute( tasks);
             }
             catch( Exception ex)

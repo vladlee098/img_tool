@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+using img_tool.src.Interfaces;
+using img_tool.src.Shared;
 
-namespace img_tool.src
+namespace img_tool.src.Core
 {
     public class ArgParser
     {
-
         public static (SortedList<int, ITask>, List<IOption>) Parse( string[] args )
         {
             // parse commands
@@ -27,6 +26,14 @@ namespace img_tool.src
                 {
                     taskTypes.Add( command.TaskType );
                 }
+                else
+                {
+                    var option = OptionFactory.Find(arg);
+                    if (option is not null)
+                    {
+                        options.Add(option);
+                    }
+                }
             }
 
             if (taskTypes.Count == 0)
@@ -34,17 +41,6 @@ namespace img_tool.src
                 ConsoleLog.WriteError($">> No commands found in arguments.");
                 return (null, null);
             }            
-
-            // parse options
-            foreach( var arg in args)
-            {
-                var option = OptionFactory.Find(arg);
-                if (option is null)
-                {
-                    continue;
-                }
-                options.Add(option);
-            }
 
             return ( TaskFactory.CreateTasks(taskTypes, options), options );
         }

@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using img_tool.src.Interfaces;
 
-namespace img_tool.src
+namespace img_tool.src.Core
 {
     
     public class Command

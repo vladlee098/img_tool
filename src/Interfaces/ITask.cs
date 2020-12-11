@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
-namespace img_tool.src
+namespace img_tool.src.Interfaces
 {
     public enum TaskTypes
     {
@@ -17,7 +14,5 @@ namespace img_tool.src
     public interface ITask
     {
         void Apply( FileInfo file, int index );
-        bool Validate(List<IOption> options);
-
     }
 }

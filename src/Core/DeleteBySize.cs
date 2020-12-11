@@ -2,27 +2,21 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+using img_tool.src.Interfaces;
+using img_tool.src.Shared;
 
-namespace img_tool.src
+namespace img_tool.src.Core
 {
-    public class DeleteBySize : ITask
+    public class DeleteBySize : TaskBase
     {
-        int _maxSize;
+        int _maxSize = 1;
 
-        public DeleteBySize( List<IOption> options )
+        public DeleteBySize( List<IOption> options ) : base(options)
         {
-            if ( !Validate(options))
+            if ( !ReadOptions(options))
             {
                 throw new ArgumentException( $"Provided options invalid for DeleteBySize, check command line");
             }
-        }
-
-        public DeleteBySize()
-        {
-            _maxSize = 1; // 1 KB by defalt
         }
 
         // public override string ToString()
@@ -36,19 +30,27 @@ namespace img_tool.src
         //     return sb.ToString();
         // }
 
-        public bool Validate(List<IOption> options)
+        protected override bool ReadOptions(List<IOption> options)
         {
             var maxSize = options.SingleOrDefault( x => x.OptionType == OptionTypes.MaxSizeKB);
             _maxSize = maxSize is null ? 1 : (maxSize as NumberOption).Data;
-            return true;        
+            
+            return base.ReadOptions(options);        
         }
 
-        public void Apply( FileInfo file, int index )
+        public override void Apply( FileInfo file, int index )
         {
             if ((file.Length / 1024) < _maxSize)
             {
-                //Win32ApiWrapper.MoveToRecycleBin(fi.FullName);
-                ConsoleLog.WriteInfo($">> File '{file.FullName}' has been moved to RecycleBin, size: {file.Length / 1024}KB");
+                if (!_test)
+                {
+                    //Win32ApiWrapper.MoveToRecycleBin(fi.FullName);
+                }
+
+                if ( _verbose )
+                {
+                    ConsoleLog.WriteInfo($">> File '{file.FullName}' has been moved to RecycleBin, size: {file.Length / 1024}KB");
+                }
             }
         }
     }

@@ -1,10 +1,10 @@
 using System;
 
-namespace img_tool.src
+namespace img_tool.src.Shared
 {
-    internal class ConsoleLog
+    public class ConsoleLog
     {
-        internal static void WriteError( string message )
+        public static void WriteError( string message )
         {
             var saved = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Red;
@@ -12,12 +12,12 @@ namespace img_tool.src
             Console.ForegroundColor = saved;
         }
 
-        internal static void WriteInfo( string message )
+        public static void WriteInfo( string message )
         {
             Console.WriteLine(message);
         }
 
-        internal static void WriteTask( string message )
+        public static void WriteTask( string message )
         {
             var saved = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.DarkCyan;
@@ -25,7 +25,7 @@ namespace img_tool.src
             Console.ForegroundColor = saved;
         }
 
-        internal static bool AskToApprove( string message )
+        public static bool AskToApprove( string message )
         {
             //Console.Clear();
             var saved = Console.ForegroundColor;

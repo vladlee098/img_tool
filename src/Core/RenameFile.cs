@@ -2,25 +2,24 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+using img_tool.src.Interfaces;
+using img_tool.src.Shared;
 
-namespace img_tool.src
+namespace img_tool.src.Core
 {
-    public class RenameFile : ITask
+    public class RenameFile : TaskBase
     {
         string _mask;
 
-        public RenameFile( List<IOption> options )
+        public RenameFile( List<IOption> options ) : base(options)
         {
-            if ( !Validate(options))
+            if ( !ReadOptions(options))
             {
                 throw new ArgumentException( $"Provided options invalid for RenameByMask, check command line");
             }
         }
 
-        public bool Validate(List<IOption> options)
+        protected override bool ReadOptions(List<IOption> options)
         {
             var mask = options.SingleOrDefault( x => x.OptionType == OptionTypes.FileName);
             if (mask is null)
@@ -29,15 +28,22 @@ namespace img_tool.src
                 return false;
             }
             _mask = (mask as TextOption).Data;
-            return true;        
+            
+            return base.ReadOptions(options);      
         }
 
-        public void Apply( FileInfo file, int index )
+        public override void Apply( FileInfo file, int index )
         {
             var oldName = file.Name;
             var newPath = Path.Combine( file.DirectoryName, _mask + "-" + index.ToString("0000") + file.Extension);
-            //file.MoveTo( newPath );
-            ConsoleLog.WriteInfo($">> File '{oldName}' has been renamed to: {newPath}");
+            if (!_test)
+            {
+                //file.MoveTo( newPath );
+            }
+            if ( _verbose )
+            {
+                ConsoleLog.WriteInfo($">> File '{oldName}' has been renamed to: {newPath}");
+            }
         }
     }
 }

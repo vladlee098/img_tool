@@ -5,22 +5,24 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using img_tool.src.Interfaces;
+using img_tool.src.Shared;
 
-namespace img_tool.src
+namespace img_tool.src.Core
 {
-    public class SetCreateDate : ITask
+    public class SetCreateDate : TaskBase
     {
         DateTime _datePattern;
 
-        public SetCreateDate( List<IOption> options )
+        public SetCreateDate( List<IOption> options ) : base(options)
         {
-            if ( !Validate(options))
+            if ( !ReadOptions(options))
             {
                 throw new ArgumentException( $"Provided options invalid for SetFileCreateDate, check command line");
             }
         }
 
-        public bool Validate(List<IOption> options)
+        protected override bool ReadOptions(List<IOption> options)
         {
             var datePattern = options.SingleOrDefault( x => x.OptionType == OptionTypes.CreationDate);
             if (datePattern is null)
@@ -29,14 +31,21 @@ namespace img_tool.src
                 return false;
             }
             _datePattern = (datePattern as DateOption).Data;
-            return true;        
+
+            return base.ReadOptions(options);      
         }
 
-        public void Apply( FileInfo file, int index )
+        public override void Apply( FileInfo file, int index )
         {
             file.CreationTime = _datePattern;
-            //File.SetLastWriteTime(file, outDate);
-            ConsoleLog.WriteInfo($">> File '{file.FullName}' has been updated, create date now is: {_datePattern}");
+            if (!_test)
+            {
+                //File.SetLastWriteTime(file, outDate);
+            }
+            if ( _verbose )
+            {
+                ConsoleLog.WriteInfo($">> File '{file.FullName}' has been updated, create date now is: {_datePattern}");
+            }
         }
     }
 }

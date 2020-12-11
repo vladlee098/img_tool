@@ -1,35 +1,30 @@
-
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+using img_tool.src.Interfaces;
+using img_tool.src.Shared;
 
-namespace img_tool.src
+namespace img_tool.src.Core
 {
-    public class DeleteByAttribute : ITask
+    public class DeleteByAttribute : TaskBase
     {
         FileAttributes _fileAttribute = FileAttributes.Archive;
 
-        public DeleteByAttribute( List<IOption> options )
+        public DeleteByAttribute( List<IOption> options ) : base(options)
         {
-            if ( !Validate(options))
+            if ( !ReadOptions(options))
             {
                 throw new ArgumentException( $"Provided options invalid for DeleteByAttribute, check command line");
             }
         }
 
-        public DeleteByAttribute()
-        {
-        }
-
-        public bool Validate(List<IOption> options)
+        protected override  bool ReadOptions(List<IOption> options)
         {
             var fileAttribute = options.SingleOrDefault( x => x.OptionType == OptionTypes.FileAttribute);
             _fileAttribute = fileAttribute is null ? FileAttributes.Archive : (fileAttribute as FileAttributeOption).Data;
-            return true;
+
+            return base.ReadOptions(options);        
         }
 
         // public override string ToString()
@@ -43,14 +38,21 @@ namespace img_tool.src
         //     return sb.ToString();
         // }
 
-        public void Apply(FileInfo file, int index)
+        public override void Apply(FileInfo file, int index)
         {
             if ((file.Attributes & _fileAttribute) == _fileAttribute)
             {
                 try
                 {
-                    //Win32ApiWrapper.MoveToRecycleBin(fi.FullName);
-                    ConsoleLog.WriteInfo($">>File '{file.FullName}' has been moved to RecycleBin, attribute: {_fileAttribute.ToString()}");
+                    if (!_test)
+                    {
+                        //Win32ApiWrapper.MoveToRecycleBin(fi.FullName);
+                    }
+
+                    if ( _verbose )
+                    {
+                        ConsoleLog.WriteInfo($">>File '{file.FullName}' has been moved to RecycleBin, attribute: {_fileAttribute.ToString()}");
+                    }
                 }
                 catch (AggregateException aex)
                 {
