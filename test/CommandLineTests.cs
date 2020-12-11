@@ -18,14 +18,21 @@ namespace img_tool.test
             Assert.AreEqual( 5, options.Count);
         }
 
+        //[Test]
+        //public void DeleteBySize_DeleteByAttribute_TwoTasksError()
+        //{
+        //    string[] testArgs = new string[] { "ds", "da", "-z:5", "-r", "-w", "-f:*Rot*" };
+        //    Assert.Throws<ArgumentException>(() => ArgParser.Parse(testArgs, new TaskValidator()));
+        //}
+
         [Test]
         public void DeleteBySize_NoSourceDir()
         {
-            string[] bySizeArgs = new string[] { "ds", "da", "-z:5", "-r", "-w", "-f:*Rot*"};
+            string[] bySizeArgs = new string[] { "ds", "-z:5", "-r", "-w", "-f:*Rot*" };
 
             var (tasks, options) = ArgParser.Parse(bySizeArgs, new TaskValidator());
-            Assert.AreEqual( 1, tasks.Count);
-            Assert.AreEqual( 5, options.Count);
+            Assert.AreEqual(1, tasks.Count);
+            Assert.AreEqual(4, options.Count);
         }
 
         [Test]

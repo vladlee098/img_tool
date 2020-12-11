@@ -12,9 +12,11 @@ namespace img_tool.src.Core
         protected bool _force;
         protected bool _test;
 
+        protected readonly List<IOption> _options;
+
         public OptionReader(List<IOption> options)
         {
-            ReadOptions(options);
+            _options = options;
         }
         
         protected override bool ReadOptions(List<IOption> options)
