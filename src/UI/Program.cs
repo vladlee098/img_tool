@@ -44,9 +44,9 @@ namespace img_tool.src
                 //string[] testArgs = new string[] { "cd", "-c:1999-01-01" , @"-i:e:\@@@test", "-f:*Rot*", "-r"};
                 //string[] testArgs = new string[] { "rd", "-d:1999-01-01" , @"-i:e:\@@@test", "-f:*Rot*", "-r"};
                 //string[] testArgs = new string[] { "ds", "da", "-z:5", "-r", "-w", @"-i:e:\@@@test", "-f:*Rot*", "-test", "-verbose"};
-                string[] testArgs = new string[] { "cd", "-d" , @"-i:e:\@@@test", "-f:*Rot*" };
+                //string[] testArgs = new string[] { "cd", "-d" , @"-i:e:\@@@test", "-f:*Rot*" };
 
-                var (tasks, options) = ArgParser.Parse(testArgs, new TaskValidator() );
+                var (tasks, options) = ArgParser.Parse(args, new TaskValidator() );
                 if (tasks is null || options is null)
                 {
                     PrintUsage();

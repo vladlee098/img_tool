@@ -5,7 +5,6 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
-    <Content Include="CommandLineTests.cs" />
     <PackageReference Include="NUnit" Version="3.12.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.0.0-beta.1" />
   </ItemGroup>
@@ -13,7 +12,12 @@
     <ProjectReference Include="..\src\Shared\Shared.csproj" />
     <ProjectReference Include="..\src\Core\Core.csproj" />
     <ProjectReference Include="..\src\Interfaces\Interfaces.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CommandLineTests.cs" />
     <Content Include="ArgParserTests.cs" />
     <Content Include="TaskValidatorTests.cs" />
+    <Content Include="MockFileProcessor.cs" />
+    <Content Include="FileProcessorTests.cs" />
   </ItemGroup>
 </Project>

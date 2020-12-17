@@ -4,7 +4,6 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="Class1.cs" />
     <Content Include="ArgParser.cs" />
     <Content Include="Commands.cs" />
     <Content Include="DeleteByAttribute.cs" />
@@ -19,10 +18,10 @@
     <Content Include="TaskBase.cs" />
     <Content Include="TaskFactory.cs" />
     <Content Include="TaskProcessor.cs" />
+    <Content Include="TaskValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Shared\Shared.csproj" />
     <ProjectReference Include="..\Interfaces\Interfaces.csproj" />
-    <Content Include="TaskValidator.cs" />
   </ItemGroup>
 </Project>
