@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using img_tool.src.Interfaces;
-using img_tool.src.Shared;
+using src.Interfaces;
+using src.Shared;
 
-namespace img_tool.src.Core
+namespace src.Core
 {
     public class SetCreateDate : TaskBase
     {

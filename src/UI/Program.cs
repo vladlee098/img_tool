@@ -1,6 +1,6 @@
 ﻿using System;
-using img_tool.src.Core;
-using img_tool.src.Shared;
+using src.Core;
+using src.Shared;
 
 namespace img_tool.src
 {

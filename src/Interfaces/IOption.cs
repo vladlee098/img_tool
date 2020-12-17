@@ -1,4 +1,4 @@
-namespace img_tool.src.Interfaces
+namespace src.Interfaces
 {
     public enum OptionTypes
     {

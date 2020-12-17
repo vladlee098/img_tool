@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace img_tool.src.Interfaces
+namespace src.Interfaces
 {
     public interface ITaskValidator
     {

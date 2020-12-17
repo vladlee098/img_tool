@@ -3,15 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UI", "src\UI\UI.csproj", "{6F68DAF6-5447-4EBB-B19A-8E27F04AAB0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UI", "src\img_tool.csproj", "{6F68DAF6-5447-4EBB-B19A-8E27F04AAB0F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "test", "test\test.csproj", "{2AF3C7E5-618F-4B24-B2F2-B3869CB268EC}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interfaces", "src\Interfaces\Interfaces.csproj", "{04C1DCCA-B90A-4EF5-AD35-C484F3134C7B}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "src\Core\Core.csproj", "{E43A7C15-46CE-4628-A806-936F842050AC}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "src\Shared\Shared.csproj", "{EDFFBE82-F880-4935-814C-ED93CEB8F642}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

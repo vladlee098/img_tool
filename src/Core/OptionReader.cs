@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using img_tool.src.Interfaces;
+using src.Interfaces;
 
-namespace img_tool.src.Core
+namespace src.Core
 {    
     public class OptionReader : OptionReaderBase
     {

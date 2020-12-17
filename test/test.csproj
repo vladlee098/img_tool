@@ -9,9 +9,7 @@
     <PackageReference Include="NUnit3TestAdapter" Version="4.0.0-beta.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\src\Shared\Shared.csproj" />
-    <ProjectReference Include="..\src\Core\Core.csproj" />
-    <ProjectReference Include="..\src\Interfaces\Interfaces.csproj" />
+    <ProjectReference Include="..\src\img_tool.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="CommandLineTests.cs" />

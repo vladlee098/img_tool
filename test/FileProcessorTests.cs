@@ -1,5 +1,5 @@
 using System;
-using img_tool.src.Core;
+using src.Core;
 using NUnit.Framework;
 
 namespace img_tool.test

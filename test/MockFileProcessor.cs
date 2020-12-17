@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
-using img_tool.src.Interfaces;
-using img_tool.src.Shared;
+using src.Interfaces;
+using src.Shared;
 
 namespace img_tool.test
 {

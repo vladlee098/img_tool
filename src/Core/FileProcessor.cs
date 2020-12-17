@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using img_tool.src.Shared;
-using img_tool.src.Interfaces;
+using src.Shared;
+using src.Interfaces;
 
-namespace img_tool.src.Core
+namespace src.Core
 {
     public class FileProcessor : IProcessor
     {

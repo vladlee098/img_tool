@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using img_tool.src.Core;
-using img_tool.src.Interfaces;
+using src.Core;
+using src.Interfaces;
 using NUnit.Framework;
 
 namespace img_tool.test

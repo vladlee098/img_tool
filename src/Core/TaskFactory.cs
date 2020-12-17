@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using img_tool.src.Interfaces;
+using src.Interfaces;
 
-namespace img_tool.src.Core
+namespace src.Core
 {
     public class TaskFactory
     {

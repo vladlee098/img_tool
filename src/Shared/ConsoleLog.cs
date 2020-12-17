@@ -1,6 +1,6 @@
 using System;
 
-namespace img_tool.src.Shared
+namespace src.Shared
 {
     public class ConsoleLog
     {

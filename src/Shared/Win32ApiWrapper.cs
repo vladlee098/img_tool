@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace img_tool.src.Shared
+namespace src.Shared
 {
     ///
     ///  https://stackoverflow.com/questions/3282418/send-a-file-to-the-recycle-bin

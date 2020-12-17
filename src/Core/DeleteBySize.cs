@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using img_tool.src.Interfaces;
-using img_tool.src.Shared;
+using src.Interfaces;
+using src.Shared;
 
-namespace img_tool.src.Core
+namespace src.Core
 {
     public class DeleteBySize : TaskBase
     {

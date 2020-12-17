@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <TargetTrim>True</TargetTrim>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include=".\UI\Program.cs" />
+    <Content Include="UI\Program.cs" />
+    <Content Include="Shared\Win32ApiWrapper.cs" />
+    <Content Include="Shared\ConsoleLog.cs" />
+    <Content Include="Interfaces\OptionReaderBase.cs" />
+    <Content Include="Interfaces\IFileProcessorFactory.cs" />
+    <Content Include="Interfaces\IOption.cs" />
+    <Content Include="Interfaces\IProcessor.cs" />
+    <Content Include="Interfaces\ITask.cs" />
+    <Content Include="Interfaces\ITaskValidator.cs" />
+    <Content Include="Interfaces\OptionBase.cs" />
+    <Content Include="Core\SetCreateDate.cs" />
+    <Content Include="Core\TaskValidator.cs" />
+    <Content Include="Core\RenameFile.cs" />
+    <Content Include="Core\TaskProcessor.cs" />
+    <Content Include="Core\ArgParser.cs" />
+    <Content Include="Core\Commands.cs" />
+    <Content Include="Core\DeleteByAttribute.cs" />
+    <Content Include="Core\DeleteBySize.cs" />
+    <Content Include="Core\FileProcessor.cs" />
+    <Content Include="Core\FileProcessorFactory.cs" />
+    <Content Include="Core\OptionFactory.cs" />
+    <Content Include="Core\OptionReader.cs" />
+    <Content Include="Core\Options.cs" />
+    <Content Include="Core\TaskBase.cs" />
+    <Content Include="Core\TaskFactory.cs" />
+  </ItemGroup>
+</Project>
