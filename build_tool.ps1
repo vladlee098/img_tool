@@ -1,2 +1,2 @@
-dotnet restore .\src\UI\UI.csproj
-dotnet build .\src\UI\UI.csproj
+dotnet restore .\src\img_tool.csproj
+dotnet build .\src\img_tool.csproj
