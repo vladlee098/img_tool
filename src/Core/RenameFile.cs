@@ -38,7 +38,7 @@ namespace src.Core
             var newPath = Path.Combine( file.DirectoryName, _mask + "-" + index.ToString("0000") + file.Extension);
             if (!_test)
             {
-                //file.MoveTo( newPath );
+                file.MoveTo( newPath );
             }
             if ( _verbose )
             {

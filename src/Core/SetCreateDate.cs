@@ -37,10 +37,10 @@ namespace src.Core
 
         public override void Apply( FileInfo file, int index )
         {
-            file.CreationTime = _datePattern;
             if (!_test)
             {
-                //File.SetLastWriteTime(file, outDate);
+                file.LastWriteTime = _datePattern;
+                file.CreationTime = _datePattern;
             }
             if ( _verbose )
             {

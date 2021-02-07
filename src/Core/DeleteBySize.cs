@@ -44,7 +44,7 @@ namespace src.Core
             {
                 if (!_test)
                 {
-                    //Win32ApiWrapper.MoveToRecycleBin(fi.FullName);
+                    Win32ApiWrapper.MoveToRecycleBin(file.FullName);
                 }
 
                 if ( _verbose )

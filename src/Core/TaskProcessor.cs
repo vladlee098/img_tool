@@ -78,14 +78,14 @@ namespace src.Core
                 ConsoleLog.WriteTask( this.ToString(tasks));
             }
             
-            if (!_force)
-            {
-                var goAhead = ConsoleLog.AskToApprove($">> Confirm delete by attribute task (Y/N): ");
-                if (!goAhead)
-                {
-                    return;
-                }
-            }
+            // if (!_force)
+            // {
+            //     var goAhead = ConsoleLog.AskToApprove($">> Confirm delete by attribute task (Y/N): ");
+            //     if (!goAhead)
+            //     {
+            //         return;
+            //     }
+            // }
                         
             var files = (from file in Directory.EnumerateFiles(
                             _sourceDir,
@@ -99,12 +99,21 @@ namespace src.Core
                 return;
             }
             ConsoleLog.WriteInfo($">>Found {files.Count()} files inside {_sourceDir}, with mask: '{_fileMask}'");
+            ConsoleLog.WriteInfo($">>Processing...");
 
             Parallel.For(0, files.Count, index => 
             { 
                 var processor = _processorFactory.Create( tasks, files[index], index, _verbose, _force, _test);
                 processor.ApplyTasks();
-            } );           
+            } ); 
+
+            // int index = 0;
+            // foreach( var file in files)
+            // {
+            //     var processor = _processorFactory.Create( tasks, file, index++, _verbose, _force, _test);
+            //     processor.ApplyTasks();
+            // }
+
         }        
     }
 }

@@ -46,7 +46,7 @@ namespace src.Core
                 {
                     if (!_test)
                     {
-                        //Win32ApiWrapper.MoveToRecycleBin(fi.FullName);
+                        Win32ApiWrapper.MoveToRecycleBin(file.FullName);
                     }
 
                     if ( _verbose )
@@ -62,6 +62,7 @@ namespace src.Core
                 {
                     ConsoleLog.WriteError($"Error while deleting '{file.FullName}': {ex.Message}");
                 }
-            }                }
+            }                
+        }
     }
 }

@@ -45,6 +45,7 @@ namespace src.Core
             {
                 throw new ArgumentException($"Command line argument '{arg}' is invalid. ");
             }
+            Data = Data.Trim('"');
 
             _dataParsed = Directory.Exists(Data);
             return _dataParsed;
