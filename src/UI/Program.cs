@@ -41,9 +41,6 @@ namespace img_tool.src
 
             try
             {
-                var testArgs = new string[] {  "fd", @"-i:C:\_github\img_tool\src\bin\Debug\net472\1986", "-f:*.*" };
-                args =  testArgs;
-
                 var (tasks, options) = ArgParser.Parse(args, new TaskValidator() );
                 if (tasks is null || options is null)
                 {
