@@ -11,6 +11,13 @@ namespace src.Shared
             Console.WriteLine(message);
             Console.ForegroundColor = saved;
         }
+        public static void WriteWarning( string message )
+        {
+            var saved = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine(message);
+            Console.ForegroundColor = saved;
+        }
 
         public static void WriteInfo( string message )
         {

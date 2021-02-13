@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net472</TargetFramework>
     <OutputType>Exe</OutputType>
     <TargetTrim>True</TargetTrim>
   </PropertyGroup>
@@ -32,5 +32,9 @@
     <Content Include="Core\Options.cs" />
     <Content Include="Core\TaskBase.cs" />
     <Content Include="Core\TaskFactory.cs" />
+    <Content Include="Core\SetDateTaken.cs" />
+    <Content Include="Shared\BitmapChangeDateTaken.cs" />
+    <Content Include="Shared\BitmapExtensions.cs" />
+    <Content Include="Core\SetDateTakenFromFileName.cs" />
   </ItemGroup>
 </Project>

@@ -31,9 +31,17 @@ namespace src.Core
             {
                 return new RenameFile(options);
             }
-            else if ( taskType == TaskTypes.SetFileDate)
+            else if ( taskType == TaskTypes.SetCreateDate)
             {
                 return new SetCreateDate(options);
+            }
+            else if ( taskType == TaskTypes.ModifyDateTaken)
+            {
+                return new SetDateTaken(options);
+            }
+            else if ( taskType == TaskTypes.ModifyDateTakenFromFileName)
+            {
+                return new SetDateTakenFromFileName(options);
             }
             throw new NotImplementedException();
         }        

@@ -22,14 +22,14 @@ namespace src.Core
             foreach( var arg in args)
             {
                 var command = Commands.TryGetCommand( arg );
-                if ( command is not null )
+                if ( command != null )
                 {
                     taskTypes.Add( command.TaskType );
                 }
                 else
                 {
                     var option = OptionFactory.Find(arg);
-                    if (option is not null)
+                    if (option != null)
                     {
                         options.Add(option);
                     }

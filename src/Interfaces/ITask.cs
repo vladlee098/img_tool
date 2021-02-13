@@ -5,9 +5,11 @@ namespace src.Interfaces
     public enum TaskTypes
     {
         RenameFile,
-        SetFileDate,
+        SetCreateDate,
         DeleteBySize,
-        DeleteByAttribute
+        DeleteByAttribute,
+        ModifyDateTaken,
+        ModifyDateTakenFromFileName,
     };
     
     

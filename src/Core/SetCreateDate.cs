@@ -39,7 +39,6 @@ namespace src.Core
         {
             if (!_test)
             {
-                file.LastWriteTime = _datePattern;
                 file.CreationTime = _datePattern;
             }
             if ( _verbose )

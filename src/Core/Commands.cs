@@ -26,10 +26,12 @@ namespace src.Core
     {
         static List<Command> Current = new List<Command> 
         { 
-            new Command( "cd", 1, TaskTypes.SetFileDate ), 
-            new Command( "rd", 2, TaskTypes.RenameFile ), 
-            new Command( "ds", 3, TaskTypes.DeleteBySize ), 
-            new Command( "da", 4, TaskTypes.DeleteByAttribute ), 
+            new Command( "md", 1, TaskTypes.ModifyDateTaken ), 
+            new Command( "fd", 1, TaskTypes.ModifyDateTakenFromFileName ), 
+            new Command( "cd", 2, TaskTypes.SetCreateDate ), 
+            new Command( "rd", 3, TaskTypes.RenameFile ), 
+            new Command( "ds", 4, TaskTypes.DeleteBySize ), 
+            new Command( "da", 5, TaskTypes.DeleteByAttribute ), 
         };
         
         public static Command TryGetCommand( string arg )
